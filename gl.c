@@ -14,22 +14,41 @@
 #define POINT GL_POINTS
 #define LINE GL_LINES
 
-
-struct line{
-    float begin_point[2];
-    float end_point[2];
-};
-
-struct point{
-    float point_p[2];
-};
-
+char choice;
+int range;
 
 struct object
 {
-    struct point P;
-    struct line L; 
+    float point_p[2];
 };
+
+void math_funcs(struct object *p)
+{
+    float y;
+    float x = -range;
+    if(choice=='1'){
+        for(float x=-range;x<=range;x++)
+        {
+            p->point_p[0]=x/100;
+            p->point_p[1]=(x*x)/100;
+            p+=sizeof(char);
+        }
+            p->point_p[0]=x/100;
+            p->point_p[1]=(x*x)/100;
+            p+=sizeof(char);
+    } else if(choice=='2'){
+        for(float x=-range;x<=range;x++)
+        {
+            p->point_p[0]=x/100;
+            p->point_p[1]=-(x*x)/100;
+            p+=sizeof(char);
+        }
+            p->point_p[0]=x/100;
+            p->point_p[1]=-(x*x)/100;
+            p+=sizeof(char);
+         
+    } else printf("You stupid fuck");
+}
 
 void randomize(float* a,float b)
 {
@@ -46,54 +65,50 @@ void randomize(float* a,float b)
 
 int cempl(int lines, int points)
 {
-    if (lines==NULL && points==NULL) return -1;
+    glLineWidth(3.0);
+    glBegin(LINE);
+        glColor3f(1.0,1.0,1.0);
+            glVertex2f(0.5,0.0);
+            glVertex2f(-0.5,0.0);
+            glVertex2f(0.0,-0.5);
+            glVertex2f(0.0,0.5);
 
-    struct object obj;
-    
+    glEnd();
+     if (lines==NULL && points==NULL) return -1;
+
+    struct object obj[2*range+1];
+    math_funcs(obj);
+
     if (lines!=NULL)
     {
-        randomize(&obj.L,0.2);
-        printf("BRGf%f:::f%f\n",obj.L.begin_point[0],obj.L.begin_point[1]);
-        printf("ENDf%f:::f%f\n",obj.L.end_point[0],obj.L.end_point[1]);
-        printf("POINTSf%f:::f%f\n",obj.P.point_p[0],obj.P.point_p[1]);
-        printf("\n\n\n\n%d",sizeof(obj));
-        
-    //glLineWidth(5.0);
+       
+    glLineWidth(5.0);
     
     glBegin(LINE);
         glColor3f(1.0,1.0,1.0);
-        glVertex2fv(obj.L.begin_point);
-        glVertex2fv(obj.L.end_point); 
+        for(int i=0;i<2*range;i++)
+        {
+            glVertex2f(obj[i].point_p[0],obj[i].point_p[1]);
+            glVertex2f(obj[i+1].point_p[0],obj[i+1].point_p[1]);
+        }
     glEnd();
-   
     }
+   
     if (points!=NULL)
     {
-
+    
+    glPointSize(3.0);
     glBegin(POINT);
-        glColor3f(1.0,1.0,1.0);
-        glVertex2fv(obj.P.point_p);
+        for(int i=0;i<2*range+1;i++)
+        {
+            glColor3f(0.0,0.0,0.0);
+            glVertex2fv(obj[i].point_p);
+        }
     glEnd();
-     
+    glFlush();
+         
     
     }
-    /*
-        struct line l1;
-        randomize(&l1,0.2);
-        glColor3f(1.0,1.0,1.0);
-        glVertex2fv(l1.point1);
-        glVertex2fv(l1.point2);
-        
-        struct line l2;
-        randomize(&l2,0.6);
-        glVertex2fv(l2.point1);
-        glVertex2fv(l2.point2);
-        
-        struct line l3;
-        randomize(&l3,0.8);
-        glVertex2fv(l3.point1);
-        glVertex2fv(l3.point2);
-    */
     
     return 0;
 }
@@ -106,14 +121,10 @@ void draw()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
     
-
-        if(cempl(1,1)==-1)
-        {
-            printf("ERROR: No data to draw\n");
-        }
+       
+    if(cempl(1,1)==-1) printf("ERROR: No data to draw\n");
 
 
-    glFlush();
     return;
 }
 
@@ -122,9 +133,9 @@ void init_window(int argc, char** argv)
 
     glutInit(&argc , argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-    glutInitWindowSize(500, 500);
-    glutInitWindowPosition(100, 140);
-    glutCreateWindow("Draw  [0.1 build]");
+    glutInitWindowSize(1000,1000);
+    glutInitWindowPosition(100,140);
+    glutCreateWindow("DYOO  [0.1 build]");
     glutDisplayFunc(draw);
     glutMainLoop();
 
@@ -133,6 +144,11 @@ void init_window(int argc, char** argv)
 
 int main(int argc, char** argv) 
 {
+    printf("Please choose function to draw\n'1' x^2\n'2' -x^2\n");
+    choice=getchar();
+    printf("select the range - from 0 to 10\n");
+    range = getchar();
+    scanf("%d", &range);
     init_window(argc,argv);
 
     return 0;
