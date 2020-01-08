@@ -127,6 +127,7 @@
                                 <property name="width_chars">3</property>
                                 <property name="text" translatable="yes">0</property>
                                 <property name="input_purpose">digits</property>
+                                <signal name="changed" handler="a_look" object="look_label_b" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -156,6 +157,7 @@
                                 <property name="width_chars">3</property>
                                 <property name="text" translatable="yes">0</property>
                                 <property name="input_purpose">digits</property>
+                                <signal name="changed" handler="a_look" object="look_label_c" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -185,6 +187,7 @@
                                 <property name="width_chars">3</property>
                                 <property name="text" translatable="yes">0</property>
                                 <property name="input_purpose">digits</property>
+                                <signal name="changed" handler="a_look" object="look_label_d" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -214,6 +217,7 @@
                                 <property name="width_chars">3</property>
                                 <property name="text" translatable="yes">0</property>
                                 <property name="input_purpose">digits</property>
+                                <signal name="changed" handler="a_look" object="look_label_const" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -280,7 +284,8 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel">
+                              <object class="GtkLabel" id="look_label_b">
+                                <property name="name">look_label_b</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="label" translatable="yes">b</property>
@@ -308,7 +313,8 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel">
+                              <object class="GtkLabel" id="look_label_c">
+                                <property name="name">look_label_c</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="label" translatable="yes">c</property>
@@ -336,7 +342,8 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel">
+                              <object class="GtkLabel" id="look_label_d">
+                                <property name="name">look_label_d</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="label" translatable="yes">d</property>
@@ -364,10 +371,11 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel">
+                              <object class="GtkLabel" id="look_label_const">
+                                <property name="name">look_label_const</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">$3</property>
+                                <property name="label" translatable="yes">0</property>
                                 <property name="width_chars">2</property>
                                 <property name="max_width_chars">2</property>
                               </object>
