@@ -23,12 +23,20 @@ public:
     float c;
     float d;
     float constant;
+    std::vector <float> points_x;
+    std::vector <float> points_y;
+
     
     int init_obj(){
     return 0;
     }
     
     int draw_obj(int line, int point){
+    points_x.clear();
+    points_y.clear();
+    math_func(abs(x));
+    glClearColor(0.0, 0.0 , 0.0, 0.0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLineWidth(1.5);
             
     glBegin(LINE);
@@ -50,16 +58,16 @@ public:
     glVertex2f(0.0,0.5);
     glVertex2f(0.01,0.48);
     glVertex2f(-0.01,0.48);
-      glEnd();
-    if (line==NULL && point==NULL) return -1;
+        glEnd();
+    if (line==0 && point==0) return -1;
     
     
-    if (line!=NULL){
+    if (line!=0){
        auto it = points_x.begin();
        auto at = points_y.begin();
        auto it1 = it+1;
        auto at1 = at+1;
-       glLineWidth(5.0);
+       glLineWidth(5.0),*it,*at;
         
         glBegin(LINE);
         
@@ -74,7 +82,7 @@ public:
         }
         glEnd();}
     
-    if (point!=NULL){
+    if (point!=0){
        auto it = points_x.begin();
        auto at = points_y.begin();
        glPointSize(3.0);
@@ -89,8 +97,8 @@ public:
        }
        glEnd();
        
-       glFlush();
        return 0;}
+    return 0;
     }
     
     void setup_obj(){
@@ -113,10 +121,6 @@ public:
         return;
     }
 }    
-private:
-    std::vector <float> points_x;
-    std::vector <float> points_y;
-
 };
 
 

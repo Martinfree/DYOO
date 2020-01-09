@@ -9,15 +9,22 @@
 #define OBJECT functions::Function
 
 OBJECT obj;
-
-void draw(){
+//GtkGLArea *area;
+extern "C"{
+G_MODULE_EXPORT void draw(GtkGLArea *area){
+   if (gtk_gl_area_get_error(area) != NULL)
+    g_print("ERROR"); 
     glClearColor(0.0, 0.0 , 0.0, 0.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glLoadIdentity();
-    
+    obj.x=10;
     obj.draw_obj(1,1);
-}
+    glFlush();
+   //glLoadIdentity();
+    
+}}
+
 //windows extensions
+/*
 namespace GlutWindow{
     void init_window(std::string param){
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
@@ -27,8 +34,6 @@ namespace GlutWindow{
     glutDisplayFunc(draw);
     glutMainLoop();}
 }
-
-
 int main(int argc, char** argv){
     glutInit(&argc , argv);
     std::vector <OBJECT> objects;
@@ -52,8 +57,8 @@ int main(int argc, char** argv){
  
     printf("function===> %fx^4+%fx^3+%fx^2+%fx+%f\n for %f to %f\n",obj.a,obj.b,obj.c,obj.d,obj.constant,-obj.x,obj.x);
     
-    obj.math_func(abs(obj.x));
     
     GlutWindow::init_window(FUNCTION);
     return 0;
 }
+*/

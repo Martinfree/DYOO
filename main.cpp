@@ -2,11 +2,11 @@
     Thanks to kafeman's article! URL: https://habr.com/ru/post/136922/
     Simple program which convert glade file to functional interface
 */
-#include <gtk/gtk.h>
+#include "OpenApi.h"
 #define NAME "Draw Your Own Object"
-#include <gmodule.h>
 GtkBuilder *builder;
 gpointer *user_data;
+
 /* создание окна в этот раз мы вынесли в отдельную функцию */
 static GtkWidget* find_interface (void)
 {
@@ -39,12 +39,41 @@ static GtkWidget* find_interface (void)
 
         return window;
 }
+
 extern "C" {
-G_MODULE_EXPORT void a_look(GtkEntry *entry,gpointer user_data){
+G_MODULE_EXPORT float get_text(GtkEntry *entry,gpointer user_data){
     const gchar *text;
     text = gtk_entry_get_text(entry);
+    char t[3];
     gtk_label_set_text(GTK_LABEL(user_data),text);
-}}
+    sprintf(t,"%s",text);
+    float q=atof(text);
+    return q;
+    }
+
+G_MODULE_EXPORT void a_look(GtkEntry *entry,gpointer user_data){
+    obj.a=get_text(entry,user_data);
+}
+
+G_MODULE_EXPORT void b_look(GtkEntry *entry,gpointer user_data){
+    obj.b=get_text(entry,user_data);
+}
+
+G_MODULE_EXPORT void c_look(GtkEntry *entry,gpointer user_data){
+    obj.c=get_text(entry,user_data);
+}
+
+G_MODULE_EXPORT void d_look(GtkEntry *entry,gpointer user_data){
+    obj.d=get_text(entry,user_data);
+}
+
+G_MODULE_EXPORT void constant_look(GtkEntry *entry,gpointer user_data){
+    obj.constant=get_text(entry,user_data);
+}
+
+
+
+}
 int main (int argc, char *argv[])
 {
         /* виджет окна */

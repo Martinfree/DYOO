@@ -127,7 +127,7 @@
                                 <property name="width_chars">3</property>
                                 <property name="text" translatable="yes">0</property>
                                 <property name="input_purpose">digits</property>
-                                <signal name="changed" handler="a_look" object="look_label_b" swapped="no"/>
+                                <signal name="changed" handler="b_look" object="look_label_b" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -157,7 +157,7 @@
                                 <property name="width_chars">3</property>
                                 <property name="text" translatable="yes">0</property>
                                 <property name="input_purpose">digits</property>
-                                <signal name="changed" handler="a_look" object="look_label_c" swapped="no"/>
+                                <signal name="changed" handler="c_look" object="look_label_c" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -187,7 +187,7 @@
                                 <property name="width_chars">3</property>
                                 <property name="text" translatable="yes">0</property>
                                 <property name="input_purpose">digits</property>
-                                <signal name="changed" handler="a_look" object="look_label_d" swapped="no"/>
+                                <signal name="changed" handler="d_look" object="look_label_d" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -217,7 +217,7 @@
                                 <property name="width_chars">3</property>
                                 <property name="text" translatable="yes">0</property>
                                 <property name="input_purpose">digits</property>
-                                <signal name="changed" handler="a_look" object="look_label_const" swapped="no"/>
+                                <signal name="changed" handler="constant_look" object="look_label_const" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -258,7 +258,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="margin_left">33</property>
-                                <property name="label" translatable="yes">a</property>
+                                <property name="label" translatable="yes">0</property>
                                 <property name="width_chars">2</property>
                                 <property name="single_line_mode">True</property>
                                 <property name="max_width_chars">2</property>
@@ -288,7 +288,7 @@
                                 <property name="name">look_label_b</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">b</property>
+                                <property name="label" translatable="yes">0</property>
                                 <property name="width_chars">2</property>
                                 <property name="max_width_chars">2</property>
                               </object>
@@ -317,7 +317,7 @@
                                 <property name="name">look_label_c</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">c</property>
+                                <property name="label" translatable="yes">0</property>
                                 <property name="width_chars">2</property>
                                 <property name="max_width_chars">2</property>
                               </object>
@@ -346,7 +346,7 @@
                                 <property name="name">look_label_d</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">d</property>
+                                <property name="label" translatable="yes">0</property>
                                 <property name="width_chars">2</property>
                                 <property name="max_width_chars">2</property>
                               </object>
@@ -431,7 +431,12 @@
                 <property name="app_paintable">True</property>
                 <property name="can_focus">False</property>
                 <property name="margin_bottom">32</property>
-                <property name="auto_render">False</property>
+                <property name="has_depth_buffer">True</property>
+                <property name="has_stencil_buffer">True</property>
+                <property name="use_es">True</property>
+                <signal name="draw" handler="draw" swapped="no"/>
+                <signal name="render" handler="draw" swapped="no"/>
+                <signal name="show" handler="draw" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">True</property>
